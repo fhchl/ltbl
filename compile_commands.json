@@ -1,0 +1,33 @@
+[
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-DPD",
+            "-I",
+            "pdinclude",
+            "-DUNIX",
+            "-fPIC",
+            "-Irpi-rgb-led-matrix/include",
+            "-Wall",
+            "-Wextra",
+            "-Wshadow",
+            "-Winline",
+            "-Wstrict-aliasing",
+            "-O3",
+            "-ffast-math",
+            "-funroll-loops",
+            "-fomit-frame-pointer",
+            "-march=core2",
+            "-mfpmath=sse",
+            "-msse",
+            "-msse2",
+            "-msse3",
+            "-o",
+            "ltbl.o",
+            "ltbl.c"
+        ],
+        "directory": "/home/fmheu/Dropbox/projects/pd-external/ltbl",
+        "file": "ltbl.c"
+    }
+]
