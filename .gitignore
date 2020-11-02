@@ -1,3 +1,4 @@
 *.o
 *.pd_linux
 .clangd
+compile_commands.json
