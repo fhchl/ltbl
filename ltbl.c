@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <unistd.h>
 
 #include "m_pd.h"
 #include "led-matrix-c.h"
@@ -62,6 +63,13 @@ void *ltbl_new(t_symbol *s, int argc, t_atom *argv)
 
 
 void ltbl_setup(void) {
+
+  if (geteuid() != 0)
+  {
+    error("Ltbl: must run as super user to access rpi-rgb-led-matrix API.");
+    return;
+  }
+
   ltbl_class = class_new(gensym("ltbl"),
         (t_newmethod)ltbl_new,
         (t_method)ltbl_free,
