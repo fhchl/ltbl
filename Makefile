@@ -12,5 +12,8 @@ ltbl: rgbmatrix
 clean:
 	$(MAKE) clean -C rpi-rgb-led-matrix/lib
 	$(MAKE) clean -f Makefile.ltbl
+	
+test: all
+	pd-l2ork ltbl-help.pd &
 
 .PHONY: clean rgbmatrix ltbl all

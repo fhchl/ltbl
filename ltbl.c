@@ -20,7 +20,7 @@ typedef struct _ltbl {
 
 void ltbl_free(t_ltbl *x)
 {
-  //led_matrix_delete(x->matrix);
+  led_matrix_delete(x->matrix);
 }
 
 
@@ -28,8 +28,6 @@ void *ltbl_new(t_symbol *s, int argc, t_atom *argv)
 {
   char **argv_char;
   t_ltbl *x = (t_ltbl *)pd_new(ltbl_class);
-
-  return (void *)x;
 
   memset(&x->options, 0, sizeof(x->options));
   x->options.rows = 32;
@@ -68,5 +66,5 @@ void ltbl_setup(void) {
         sizeof(t_ltbl),
         CLASS_DEFAULT,
         A_GIMME,
-        0);
+        0); 
 }
