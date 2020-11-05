@@ -1,2 +1,8 @@
-#N canvas 869 381 782 553 12;
-#X obj 327 240 ltbl;
+#N canvas 582 228 782 578 12;
+#X msg 171 94 init --led-rows=32 --led-cols=64 --led-chain=2 --led-slowdown-gpio=4
+--led-gpio-mapping=adafruit-hat --led-pixel-mapper="Mirror:V!U-mapper"
+;
+#X obj 140 199 ltbl --led-rows=32 --led-cols=64 --led-chain=2 --led-slowdown-gpio=4
+--led-gpio-mapping=adafruit-hat --led-pixel-mapper="Mirror:V!U-mapper"
+;
+#X connect 0 0 1 0;

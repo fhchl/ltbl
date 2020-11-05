@@ -1,4 +1,8 @@
-#include <stdio.h>
+/* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*-
+ *
+ * Using the C-API of this library.
+ *
+ */
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
@@ -102,8 +106,8 @@ void ltbl_setup(void) {
   class_addlist(ltbl_class, (t_method)ltbl_list);
 }
 
-
 int main(int argc, char **argv) {
+  printf("lubb");
   struct RGBLedMatrixOptions options;
   struct RGBLedMatrix *matrix;
   struct LedCanvas *offscreen_canvas;
@@ -119,38 +123,37 @@ int main(int argc, char **argv) {
   if (matrix == NULL)
     return 1;
 
-  /* Let's do an example with double-buffering. We create one extra
-   * buffer onto which we draw, which is then swapped on each refresh.
-   * This is typically a good aproach for animations and such.
-   */
-  offscreen_canvas = led_matrix_create_offscreen_canvas(matrix);
+  //~ /* Let's do an example with double-buffering. We create one extra
+   //~ * buffer onto which we draw, which is then swapped on each refresh.
+   //~ * This is typically a good aproach for animations and such.
+   //~ */
+  //~ offscreen_canvas = led_matrix_create_offscreen_canvas(matrix);
 
-  led_canvas_get_size(offscreen_canvas, &width, &height);
+  //~ led_canvas_get_size(offscreen_canvas, &width, &height);
 
-  fprintf(stderr, "Size: %dx%d. Hardware gpio mapping: %s\n",
-          width, height, options.hardware_mapping);
+  //~ fprintf(stderr, "Size: %dx%d. Hardware gpio mapping: %s\n",
+          //~ width, height, options.hardware_mapping);
 
-  for (i = 0; i < 1000; ++i) {
-    for (y = 0; y < height; ++y) {
-      for (x = 0; x < width; ++x) {
-        led_canvas_set_pixel(offscreen_canvas, x, y, i & 0xff, x, y);
-      }
-    }
+  //~ for (i = 0; i < 1000; ++i) {
+    //~ for (y = 0; y < height; ++y) {
+      //~ for (x = 0; x < width; ++x) {
+        //~ led_canvas_set_pixel(offscreen_canvas, x, y, i & 0xff, x, y);
+      //~ }
+    //~ }
 
-    /* Now, we swap the canvas. We give swap_on_vsync the buffer we
-     * just have drawn into, and wait until the next vsync happens.
-     * we get back the unused buffer to which we'll draw in the next
-     * iteration.
-     */
-    offscreen_canvas = led_matrix_swap_on_vsync(matrix, offscreen_canvas);
-  }
+    //~ /* Now, we swap the canvas. We give swap_on_vsync the buffer we
+     //~ * just have drawn into, and wait until the next vsync happens.
+     //~ * we get back the unused buffer to which we'll draw in the next
+     //~ * iteration.
+     //~ */
+    //~ offscreen_canvas = led_matrix_swap_on_vsync(matrix, offscreen_canvas);
+  //~ }
 
-  /*
-   * Make sure to always call led_matrix_delete() in the end to reset the
-   * display. Installing signal handlers for defined exit is a good idea.
-   */
-  led_matrix_delete(matrix);
+  //~ /*
+   //~ * Make sure to always call led_matrix_delete() in the end to reset the
+   //~ * display. Installing signal handlers for defined exit is a good idea.
+   //~ */
+  //~ led_matrix_delete(matrix);
 
-  return 0;
+  //~ return 0;
 }
-  
