@@ -7,7 +7,7 @@ RGB_LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread
 
 class.sources = ltbl.c
 cflags = -I$(RGB_INCDIR)
-ldflags = $(RGB_LDFLAGS) -lstdc++
+ldlibs = $(RGB_LDFLAGS)
 
 PDINCLUDEDIR = pdinclude
 PDLIBDIR = $(HOME)/.local/lib/pd/extra-purr-data  # make installs here

@@ -1,35 +1,32 @@
-RGB_LIBDIR=rpi-rgb-led-matrix/lib
-
-RGB_LIB_DISTRIBUTION=rpi-rgb-led-matrix
+RGB_LIB_DISTRIBUTION=../rpi-rgb-led-matrix
 RGB_INCDIR=$(RGB_LIB_DISTRIBUTION)/include
 RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
 RGB_LIBRARY_NAME=rgbmatrix
 RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
-RGB_LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread
+RGB_LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread -lstdc++
 
-all: rgbmatrix ltbl
+all: prog
 
 rgbmatrix:
-	$(MAKE) -C rpi-rgb-led-matrix/lib
+	$(MAKE) -C $(RGB_LIBDIR)
 
-ltbl: rgbmatrix
-	$(MAKE) -f Makefile.ltbl
-	
-	
-libexample.so: rgbmatrix
-	cc -shared -fPIC -I$(RGB_INCDIR) -L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread  -o libexample.so libexample.c 
+example.o: example.c
+	cc -c -Wall -Wpedantic -fpic -I$(RGB_INCDIR) -o $@ $<
 
-main: libexample.so
-	cc -rdynamic -ldl -c main.c
+libexample.so: example.o rgbmatrix
+	# important that parts that refer to symbols come before their definition
+	cc -Wall -Wpedantic -shared -o $@ $< -L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lstdc++
 
-debug: rgbmatrix
-	CFLAGS="-O0 -ggdb" $(MAKE) -e -f Makefile.ltbl
-	
+main.o: main.c
+	cc -c -Wall -Wpedantic -o $@ $<
+
+prog: main.o | libexample.so
+	cc -o $@ $< -ldl
+
+test: prog
+	sudo ./$<
+
 clean:
-	$(MAKE) clean -C rpi-rgb-led-matrix/lib
-	$(MAKE) clean -f Makefile.ltbl
-	
-test: all
-	sudo pd-l2ork ltbl-help.pd
+	rm *.o *.so prog
 
-.PHONY: clean rgbmatrix ltbl all
+.PHONY: clean main
