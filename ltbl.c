@@ -98,16 +98,22 @@ void ltbl_list(t_ltbl *x, t_symbol *s, int argc, t_atom *argv)
   }
   
   int i;
-  uint8_t r,g,b;
+  uint8_t r,g,b,a;
   for (int ix=0; ix<x->width; ix++)
   { 
     for (int iy=0; iy<x->height; iy++)
     {
       i = 4 * (ix + iy * x->width);
-      r = atom_getint(argv + i);
-      g = atom_getint(argv + i + 1);
-      b = atom_getint(argv + i + 2);
-      
+
+      a = atom_getint(argv + i + 3); 
+      if (a == 0) r = g = b = 0; // how to handle transparency? right now set to black.
+      else
+      {
+        r = atom_getint(argv + i);
+	g = atom_getint(argv + i + 1);
+        b = atom_getint(argv + i + 2);
+      }
+	      
       led_canvas_set_pixel(x->offscreen_canvas, ix, iy, r, g, b);
     }
   }
