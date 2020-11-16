@@ -92,9 +92,9 @@ void ltbl_list(t_ltbl *x, t_symbol *s, int argc, t_atom *argv)
     return;
   }
   
-  if (argc != x->width * x->height * 3)
+  if (argc != x->width * x->height * 4)
   {
-    pd_error(x, "Wrong number of pixels: %i != %i x %i x 3", argc, x->width, x->height);
+    pd_error(x, "Wrong number of pixels: %i != %i x %i x 4", argc, x->width, x->height);
   }
   
   int i;
@@ -103,8 +103,7 @@ void ltbl_list(t_ltbl *x, t_symbol *s, int argc, t_atom *argv)
   { 
     for (int iy=0; iy<x->height; iy++)
     {
-      i = 3 * (ix + iy * x->width);
-      fprintf(stderr, "ix: %i iy: %i i: %i\n", ix, iy, i);
+      i = 4 * (ix + iy * x->width);
       r = atom_getint(argv + i);
       g = atom_getint(argv + i + 1);
       b = atom_getint(argv + i + 2);
