@@ -1,42 +1,22 @@
+#  rpi-rgb-led-matrix for Pd
+
+> Let there be light!
+
+This is a simple wrapper of the excellent [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) library for Pure Data. The provided Pd external makes it easy to draw on a LED matrix with a Raspberry Pi. Just convert your images or animations to list with RGB or RGBA values for each LED pixel.
+
+# Build
+
+Clone the repo and build the object.
+
     git clone
+    cd ltbl
     git submodule update --init --recursive
+    make
 
+# Usage
 
-Can load matrix patch:
+See the provided help patch. You can run it with
 
-need root with sudo? Need to give some specific parameters?
+    make test
 
-No 32-64 bit incompatibility. Both are elf32-littlearm. Checked with
-
-    file ...
-    objdump -f /usr/bin/pd-l2ork
-
-
-Start gdb
-
-	sudo gdb /usr/bin/pd-l2ork
-	add-symbol-file ltbl.pd_linux
-	break ltbl_init
-
-start pd
-
-	sudo pd-l2ork ltbl-help.pd
-
-
-
-
-or something
-
-...
-
-sudo gdb pd-l2ork
-attach-symbol file ltbl.pd_linux
-break ltbl_setup
-
-run sudo pd-l2ork ltbl-help 
-
-
-Try:
-
-- https://stackoverflow.com/questions/36692315/what-exactly-does-rdynamic-do-and-when-exactly-is-it-needed
-- simple liblib
+The `Makefile` assumes purr-data, which you have to run as root for `rpi-rgb-led-matrix` to work!
