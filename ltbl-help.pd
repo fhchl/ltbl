@@ -1,14 +1,14 @@
-#N canvas 994 346 782 578 12;
-#X msg 308 93 init --led-rows=32 --led-cols=64 --led-chain=2 --led-slowdown-gpio=4
+#N canvas 0 26 2560 1389 12;
+#X msg 470 50 init --led-rows=32 --led-cols=64 --led-chain=2 --led-slowdown-gpio=4
 --led-gpio-mapping=adafruit-hat --led-pixel-mapper=Mirror:V!U-mapper
 ;
-#X obj 142 192 ltbl --led-rows=32 --led-cols=64 --led-chain=2 --led-slowdown-gpio=4
+#X obj 470 340 ltbl --led-rows=32 --led-cols=64 --led-chain=2 --led-slowdown-gpio=4
 --led-gpio-mapping=adafruit-hat --led-pixel-mapper=Mirror:V!U-mapper
 ;
-#X msg 66 94 test;
-#X msg 123 93 destroy;
-#X msg 205 92 clear;
-#N canvas 652 260 653 398 generalte_list 1;
+#X msg 500 170 test;
+#X msg 500 120 destroy;
+#X msg 500 290 clear;
+#N canvas 0 26 2560 1414 generalte_list 1;
 #X obj 30 235 list;
 #X obj 30 280 list append;
 #X msg 99 221 255 255 255;
@@ -20,42 +20,53 @@
 #X text 201 222 Chose color;
 #X obj 191 285 outlet;
 #X obj 30 65 inlet;
-#X text 35 21 creates list full of colors;
 #X obj 122 124 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X obj 209 333 length;
 #X floatatom 209 362 7 0 0 0 - - -, f 7;
 #X obj 320 30 import zexy;
 #X obj 30 95 Uzi 4096;
+#X text 35 21 builds a list of one color;
 #X connect 0 0 1 0;
 #X connect 1 0 0 1;
 #X connect 1 0 4 1;
 #X connect 2 0 1 1;
 #X connect 2 0 0 1;
-#X connect 3 0 15 0;
+#X connect 3 0 14 0;
 #X connect 4 0 8 0;
-#X connect 4 0 12 0;
+#X connect 4 0 11 0;
 #X connect 5 0 2 0;
 #X connect 5 0 6 0;
 #X connect 6 0 0 1;
-#X connect 9 0 15 0;
-#X connect 12 0 13 0;
-#X connect 15 0 0 0;
-#X connect 15 1 4 0;
-#X connect 15 1 6 0;
-#X connect 15 1 11 0;
-#X restore 52 273 pd generalte_list;
-#X obj 51 228 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000;
-#X obj 94 340 list;
-#X obj 38 324 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000;
+#X connect 9 0 14 0;
+#X connect 11 0 12 0;
+#X connect 14 0 0 0;
+#X connect 14 1 4 0;
+#X connect 14 1 6 0;
+#X connect 14 1 10 0;
+#X restore 500 230 pd generalte_list;
+#X obj 500 210 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 30 170 Displays a test picture that indicates all corners of
+the matrix, f 59;
+#X text 30 120 Deletes the matrix (calls 'led_matrix_delete'). Reinitialize
+with 'init'., f 59;
+#X text 330 290 Clear the image.;
+#X text 30 340 Important: Pure Data must be run as root write the array.
+This is a limitation of the excellent C library used (github.com/hzeller/rpi-rgb-led-matrix/issues).
+;
+#X text 30 230 Send a list of floats to the inlet to display a picture.
+The list must contain three floats for each pixel (RGB). If the matrix
+chain has 64x64 pixels the list must have, f 59;
+#X text 30 50 Initializes the LED matrix with new arguments (calls
+'led_matrix_create_from_options'). All creation arguments are just
+forwarded to the 'rpi-rgb-led-matrix' library., f 59;
+#X text 30 420 As semicolon terminates a line in Pd \, you can instead
+use a exclaimation mark (!) instead of a semicolon to separater mapper
+arguments.;
 #X connect 0 0 1 0;
 #X connect 2 0 1 0;
 #X connect 3 0 1 0;
 #X connect 4 0 1 0;
 #X connect 5 0 1 0;
-#X connect 5 0 7 1;
 #X connect 6 0 5 0;
-#X connect 7 0 1 0;
-#X connect 8 0 7 0;
