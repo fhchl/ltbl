@@ -2,7 +2,7 @@
 
 > Let there be light!
 
-This is a simple wrapper of the excellent [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) library for Pure Data. The provided Pd external makes it easy to draw on a LED matrix with a Raspberry Pi. Just convert your images or animations to list with RGB or RGBA values for each LED pixel.
+This is a simple wrapper of the excellent [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) library for Pure Data. The provided Pd external makes it easy to draw on a LED matrix with a Raspberry Pi. Just convert your images or animations to lists with RGB or RGBA values for each LED pixel and send it to the object.
 
 # Build
 
